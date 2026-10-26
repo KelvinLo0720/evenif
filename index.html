@@ -1,432 +1,1986 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>evenif｜月度績效報告 2026.08.28–09.27</title>
-<style>
-  :root{
-    --bg:#f4f0ea;
-    --paper:#fbf8f3;
-    --ink:#2d2926;
-    --muted:#756e67;
-    --line:#ded6cc;
-    --brown:#5a4030;
-    --brown-2:#8d6b56;
-    --soft:#eee5dc;
-    --green:#65715f;
-    --amber:#b38852;
-    --rose:#a97971;
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0;
-    font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei",Arial,sans-serif;
-    color:var(--ink);
-    background:var(--bg);
-    line-height:1.65;
-  }
-  .wrap{max-width:1180px;margin:0 auto;padding:40px 24px 64px}
-  .hero{
-    background:linear-gradient(135deg,#efe7dd 0%,#fbf8f3 58%,#efe7dd 100%);
-    border:1px solid var(--line);
-    padding:44px 44px 40px;
-    margin-bottom:24px;
-  }
-  .eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--brown-2);margin:0 0 12px}
-  h1{font-family:Georgia,"Times New Roman","Noto Serif TC",serif;font-weight:500;font-size:40px;line-height:1.2;margin:0 0 10px}
-  .subtitle{font-size:16px;color:var(--muted);margin:0}
-  .period{margin-top:24px;padding-top:18px;border-top:1px solid var(--line);display:flex;gap:28px;flex-wrap:wrap;font-size:14px;color:var(--muted)}
-  .grid{display:grid;gap:16px}
-  .kpis{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:24px}
-  .card{
-    background:var(--paper);
-    border:1px solid var(--line);
-    padding:22px;
-  }
-  .kpi .label{font-size:12px;letter-spacing:.08em;color:var(--muted);margin-bottom:8px}
-  .kpi .value{font-family:Georgia,"Times New Roman",serif;font-size:30px;line-height:1.15}
-  .kpi .delta{font-size:13px;margin-top:8px;color:var(--muted)}
-  .up{color:var(--green)!important}
-  .down{color:var(--rose)!important}
-  .section{
-    background:var(--paper);
-    border:1px solid var(--line);
-    padding:30px;
-    margin-bottom:24px;
-  }
-  h2{font-family:Georgia,"Times New Roman","Noto Serif TC",serif;font-weight:500;font-size:27px;margin:0 0 18px}
-  h3{font-size:17px;margin:26px 0 8px}
-  p{margin:10px 0}
-  .lead{
-    font-size:18px;
-    max-width:900px;
-    color:#453d37;
-  }
-  .highlight{
-    border-left:3px solid var(--brown);
-    padding:14px 16px;
-    background:#f3ece5;
-    margin:18px 0;
-  }
-  .two{grid-template-columns:1fr 1fr}
-  .three{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .mini{
-    background:#f5efe9;
-    border:1px solid #e4d9cf;
-    padding:18px;
-  }
-  .mini strong{display:block;font-size:18px;margin-bottom:4px}
-  table{width:100%;border-collapse:collapse;font-size:14px}
-  th,td{padding:12px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
-  th{font-weight:600;color:#4f463f;background:#f4eee8}
-  .num{text-align:right;white-space:nowrap}
-  .bar-row{display:grid;grid-template-columns:180px 1fr 70px;gap:12px;align-items:center;margin:11px 0}
-  .bar{height:10px;background:#e7dfd6;overflow:hidden}
-  .fill{height:100%;background:var(--brown-2)}
-  .funnel{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}
-  .step{
-    background:#f5efe9;border:1px solid #e3d9cf;padding:18px;text-align:center
-  }
-  .step .n{font-family:Georgia,serif;font-size:28px}
-  .step .t{font-size:12px;color:var(--muted);margin-top:2px}
-  .arrow{font-size:12px;color:var(--muted);margin-top:8px}
-  .note{font-size:12px;color:var(--muted);margin-top:12px}
-  .pill{display:inline-block;border:1px solid #cdbdae;padding:4px 9px;font-size:12px;margin:3px 4px 3px 0;background:#f7f2ed}
-  .priority{display:grid;grid-template-columns:80px 1fr 1.3fr;gap:0;border:1px solid var(--line);border-bottom:0}
-  .priority > div{padding:14px;border-bottom:1px solid var(--line)}
-  .priority > div:nth-child(3n+1){font-weight:700;background:#f2ebe4}
-  .priority > div:nth-child(3n+2){font-weight:600}
-  .foot{
-    font-size:12px;color:var(--muted);padding:10px 4px
-  }
-  .tag{font-size:11px;letter-spacing:.07em;color:var(--brown-2);text-transform:uppercase}
-  @media (max-width:850px){
-    .kpis,.three,.two,.funnel{grid-template-columns:1fr 1fr}
-    .bar-row{grid-template-columns:120px 1fr 60px}
-    .priority{grid-template-columns:65px 1fr}
-    .priority > div:nth-child(3n+3){grid-column:1/-1;background:#faf7f3}
-  }
-  @media (max-width:560px){
-    .wrap{padding:18px 12px 42px}
-    .hero{padding:30px 22px}
-    h1{font-size:31px}
-    .kpis,.three,.two,.funnel{grid-template-columns:1fr}
-    .section{padding:22px 18px}
-  }
-  @media print{
-    body{background:#fff}
-    .wrap{max-width:none;padding:0}
-    .hero,.section,.card{break-inside:avoid}
-    .section{page-break-inside:avoid}
-  }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>evenif｜月度營運及 Meta 廣告績效報告 2026.09.27–10.26</title>
+
+  <style>
+    :root{
+      --bg:#f4f0ea;
+      --paper:#fbf8f3;
+      --ink:#2d2926;
+      --muted:#756e67;
+      --line:#ded6cc;
+      --brown:#5a4030;
+      --brown-2:#8d6b56;
+      --soft:#eee5dc;
+      --green:#65715f;
+      --amber:#b38852;
+      --rose:#a97971;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "PingFang TC",
+        "Noto Sans TC",
+        "Microsoft JhengHei",
+        Arial,
+        sans-serif;
+      color:var(--ink);
+      background:var(--bg);
+      line-height:1.65;
+    }
+
+    a{
+      color:inherit;
+    }
+
+    .wrap{
+      max-width:1180px;
+      margin:0 auto;
+      padding:40px 24px 64px;
+    }
+
+    .hero{
+      background:
+        linear-gradient(
+          135deg,
+          #efe7dd 0%,
+          #fbf8f3 58%,
+          #efe7dd 100%
+        );
+      border:1px solid var(--line);
+      padding:44px 44px 40px;
+      margin-bottom:24px;
+    }
+
+    .eyebrow{
+      font-size:12px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:var(--brown-2);
+      margin:0 0 12px;
+    }
+
+    h1{
+      font-family:
+        Georgia,
+        "Times New Roman",
+        "Noto Serif TC",
+        serif;
+      font-weight:500;
+      font-size:40px;
+      line-height:1.2;
+      margin:0 0 10px;
+    }
+
+    h2{
+      font-family:
+        Georgia,
+        "Times New Roman",
+        "Noto Serif TC",
+        serif;
+      font-weight:500;
+      font-size:27px;
+      line-height:1.35;
+      margin:0 0 18px;
+    }
+
+    h3{
+      font-size:17px;
+      margin:26px 0 8px;
+    }
+
+    p{
+      margin:10px 0;
+    }
+
+    .subtitle{
+      font-size:16px;
+      color:var(--muted);
+      margin:0;
+    }
+
+    .period{
+      margin-top:24px;
+      padding-top:18px;
+      border-top:1px solid var(--line);
+      display:flex;
+      gap:28px;
+      flex-wrap:wrap;
+      font-size:14px;
+      color:var(--muted);
+    }
+
+    .data-note{
+      margin-top:18px;
+      padding:12px 15px;
+      background:rgba(255,255,255,.45);
+      border-left:2px solid var(--brown-2);
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    .grid{
+      display:grid;
+      gap:16px;
+    }
+
+    .kpis{
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      margin-bottom:24px;
+    }
+
+    .card{
+      background:var(--paper);
+      border:1px solid var(--line);
+      padding:22px;
+    }
+
+    .kpi .label{
+      font-size:12px;
+      letter-spacing:.08em;
+      color:var(--muted);
+      margin-bottom:8px;
+    }
+
+    .kpi .value{
+      font-family:Georgia,serif;
+      font-size:30px;
+      line-height:1.15;
+    }
+
+    .kpi .delta{
+      font-size:13px;
+      margin-top:8px;
+      color:var(--muted);
+    }
+
+    .up{
+      color:var(--green)!important;
+    }
+
+    .down{
+      color:var(--rose)!important;
+    }
+
+    .neutral{
+      color:var(--amber)!important;
+    }
+
+    .section{
+      background:var(--paper);
+      border:1px solid var(--line);
+      padding:30px;
+      margin-bottom:24px;
+    }
+
+    .tag{
+      display:block;
+      font-size:11px;
+      letter-spacing:.07em;
+      color:var(--brown-2);
+      text-transform:uppercase;
+      margin-bottom:5px;
+    }
+
+    .lead{
+      font-size:18px;
+      max-width:950px;
+      color:#453d37;
+    }
+
+    .highlight{
+      border-left:3px solid var(--brown);
+      padding:14px 16px;
+      background:#f3ece5;
+      margin:18px 0;
+    }
+
+    .two{
+      grid-template-columns:1fr 1fr;
+    }
+
+    .three{
+      grid-template-columns:repeat(3,minmax(0,1fr));
+    }
+
+    .four{
+      grid-template-columns:repeat(4,minmax(0,1fr));
+    }
+
+    .mini{
+      background:#f5efe9;
+      border:1px solid #e4d9cf;
+      padding:18px;
+    }
+
+    .mini strong{
+      display:block;
+      font-size:18px;
+      margin-bottom:4px;
+    }
+
+    .mini .small{
+      margin-top:5px;
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      font-size:14px;
+    }
+
+    th,
+    td{
+      padding:12px 10px;
+      border-bottom:1px solid var(--line);
+      text-align:left;
+      vertical-align:top;
+    }
+
+    th{
+      font-weight:600;
+      color:#4f463f;
+      background:#f4eee8;
+    }
+
+    .num{
+      text-align:right;
+      white-space:nowrap;
+    }
+
+    .note{
+      font-size:12px;
+      color:var(--muted);
+      margin-top:12px;
+    }
+
+    .bar-row{
+      display:grid;
+      grid-template-columns:180px 1fr 72px;
+      gap:12px;
+      align-items:center;
+      margin:11px 0;
+    }
+
+    .bar{
+      height:10px;
+      background:#e7dfd6;
+      overflow:hidden;
+    }
+
+    .fill{
+      height:100%;
+      background:var(--brown-2);
+    }
+
+    .fill.soft{
+      background:#bea893;
+    }
+
+    .funnel{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:10px;
+      margin-top:16px;
+    }
+
+    .step{
+      background:#f5efe9;
+      border:1px solid #e3d9cf;
+      padding:18px;
+      text-align:center;
+    }
+
+    .step .n{
+      font-family:Georgia,serif;
+      font-size:28px;
+    }
+
+    .step .t{
+      font-size:12px;
+      color:var(--muted);
+      margin-top:2px;
+    }
+
+    .step .arrow{
+      font-size:12px;
+      color:var(--muted);
+      margin-top:8px;
+    }
+
+    .metric-callout{
+      padding:20px;
+      background:#f6f1eb;
+      border:1px solid var(--line);
+    }
+
+    .metric-callout .big{
+      font-family:Georgia,serif;
+      font-size:31px;
+      line-height:1.1;
+      margin-bottom:8px;
+    }
+
+    .pill{
+      display:inline-block;
+      border:1px solid #cdbdae;
+      padding:4px 9px;
+      font-size:12px;
+      margin:3px 4px 3px 0;
+      background:#f7f2ed;
+    }
+
+    .priority{
+      display:grid;
+      grid-template-columns:80px 1fr 1.5fr;
+      border:1px solid var(--line);
+      border-bottom:0;
+      margin-top:18px;
+    }
+
+    .priority > div{
+      padding:14px;
+      border-bottom:1px solid var(--line);
+    }
+
+    .priority > div:nth-child(3n+1){
+      font-weight:700;
+      background:#f2ebe4;
+    }
+
+    .priority > div:nth-child(3n+2){
+      font-weight:600;
+    }
+
+    .product-rank{
+      display:grid;
+      grid-template-columns:54px 1.8fr .9fr .7fr .7fr;
+      gap:0;
+      border:1px solid var(--line);
+      border-bottom:0;
+      font-size:14px;
+    }
+
+    .product-rank > div{
+      padding:11px 10px;
+      border-bottom:1px solid var(--line);
+    }
+
+    .product-rank .rank{
+      background:#f2ebe4;
+      font-family:Georgia,serif;
+      font-size:17px;
+      text-align:center;
+    }
+
+    .product-rank .money,
+    .product-rank .qty,
+    .product-rank .share{
+      text-align:right;
+      white-space:nowrap;
+    }
+
+    .quote{
+      margin:22px 0 0;
+      padding:20px 24px;
+      background:#ede4da;
+      font-family:
+        Georgia,
+        "Noto Serif TC",
+        serif;
+      font-size:20px;
+      line-height:1.55;
+    }
+
+    .foot{
+      font-size:12px;
+      color:var(--muted);
+      padding:10px 4px;
+    }
+
+    .source-links{
+      font-size:12px;
+      color:var(--muted);
+      padding-top:14px;
+      border-top:1px solid var(--line);
+      margin-top:18px;
+    }
+
+    .source-links a{
+      word-break:break-all;
+    }
+
+    @media (max-width:900px){
+      .kpis,
+      .four{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .three{
+        grid-template-columns:1fr;
+      }
+
+      .priority{
+        grid-template-columns:65px 1fr;
+      }
+
+      .priority > div:nth-child(3n+3){
+        grid-column:1/-1;
+        background:#faf7f3;
+      }
+
+      .product-rank{
+        grid-template-columns:46px 1.5fr .8fr;
+      }
+
+      .product-rank .qty,
+      .product-rank .share{
+        display:none;
+      }
+    }
+
+    @media (max-width:750px){
+      .two,
+      .funnel{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .bar-row{
+        grid-template-columns:120px 1fr 60px;
+      }
+    }
+
+    @media (max-width:560px){
+      .wrap{
+        padding:18px 12px 42px;
+      }
+
+      .hero{
+        padding:30px 22px;
+      }
+
+      h1{
+        font-size:31px;
+      }
+
+      .kpis,
+      .two,
+      .four,
+      .funnel{
+        grid-template-columns:1fr;
+      }
+
+      .section{
+        padding:22px 18px;
+      }
+
+      table{
+        font-size:12px;
+      }
+
+      th,
+      td{
+        padding:9px 7px;
+      }
+    }
+
+    @media print{
+      body{
+        background:#fff;
+      }
+
+      .wrap{
+        max-width:none;
+        padding:0;
+      }
+
+      .hero,
+      .section,
+      .card{
+        break-inside:avoid;
+      }
+
+      .section{
+        page-break-inside:avoid;
+      }
+    }
+  </style>
 </head>
+
 <body>
+
 <div class="wrap">
 
+  <!-- HERO -->
   <header class="hero">
-    <p class="eyebrow">evenif performance review</p>
-    <h1>月度營運及 Meta 廣告績效報告</h1>
-    <p class="subtitle">聚焦整體營運、轉化效率、媒體投放及下一階段增長機會</p>
+
+    <p class="eyebrow">
+      evenif performance review
+    </p>
+
+    <h1>
+      月度營運及 Meta 廣告績效報告
+    </h1>
+
+    <p class="subtitle">
+      聚焦客戶結構、轉化效率、媒體投放及下一階段增長機會
+    </p>
+
     <div class="period">
-      <span><strong>本期：</strong>2026/08/28 – 2026/09/27</span>
-      <span><strong>對比期：</strong>2026/07/28 – 2026/08/27</span>
+
+      <span>
+        <strong>本期：</strong>
+        2026/09/27 – 2026/10/26
+      </span>
+
+      <span>
+        <strong>對比期：</strong>
+        2026/08/27 – 2026/09/26
+      </span>
+
     </div>
+
+    <div class="data-note">
+      本期數據截至 10 月 26 日下午約 1 時，當日尚未結束。
+      本期涵蓋 30 日，對比期涵蓋 31 日。
+      Shopify 自 9 月下旬起更新部分 Sessions 計算方式，
+      跨期流量數據宜配合訂單及轉化數據一併解讀。
+    </div>
+
   </header>
 
+
+  <!-- KPI -->
   <section class="grid kpis">
+
     <div class="card kpi">
       <div class="label">總銷售額</div>
-      <div class="value">HK$21,382</div>
-      <div class="delta down">較上期 -37.7%</div>
+      <div class="value">HK$15,151</div>
+      <div class="delta down">
+        較上期 -26.0%
+      </div>
     </div>
+
     <div class="card kpi">
       <div class="label">訂單數</div>
-      <div class="value">24</div>
-      <div class="delta down">較上期 -35.1%</div>
+      <div class="value">19</div>
+      <div class="delta down">
+        較上期 -13.6%
+      </div>
     </div>
+
     <div class="card kpi">
       <div class="label">平均訂單價值 AOV</div>
-      <div class="value">HK$891</div>
-      <div class="delta">較上期 -4.0%</div>
+      <div class="value">HK$797</div>
+      <div class="delta down">
+        較上期 -14.3%
+      </div>
     </div>
+
     <div class="card kpi">
-      <div class="label">折扣率</div>
-      <div class="value">7.76%</div>
-      <div class="delta up">較上期改善 3.27pp</div>
+      <div class="label">Meta ROAS</div>
+      <div class="value">1.65</div>
+      <div class="delta down">
+        上期 2.42
+      </div>
     </div>
+
   </section>
 
+
+  <!-- EXECUTIVE SUMMARY -->
   <section class="section">
-    <span class="tag">Executive summary</span>
-    <h2>本期重點摘要</h2>
+
+    <span class="tag">
+      Executive summary
+    </span>
+
+    <h2>
+      本期重點摘要
+    </h2>
+
     <p class="lead">
-      本期整體銷售及訂單量較上期回調，主要來自<strong>流量規模收斂及轉化率回落</strong>。
-      同時，網站端仍然錄得多項具質素的訊號，包括加購率創近期高位、折扣結構更健康、
-      回購客戶佔比提升，以及官網直接回訪客的客單價明顯增加。
+      本期整體銷售及平均訂單金額較上期回調，
+      但客戶結構反映<strong>新客 acquisition 仍保持穩定</strong>：
+      新客人數維持 13 人，新客收入亦保持約 HK$8,500。
+      今期較明顯的變化主要來自回購客收入及高金額訂單減少。
     </p>
+
     <div class="highlight">
-      從增長角度看，本期最值得優先處理的不是單純增加流量，而是把已經對產品產生興趣的訪客，
-      更順暢地帶到完成購買。若整體轉化率由目前 1.06% 回復至約 1.4%，在相若流量水平下，
-      月銷售額已可接近 HK$28,000 的下一階段目標。
+      今期另一個值得留意的訊號，是到達 Checkout 的訪問由
+      <strong>52 次增加至 71 次，升幅 36.5%</strong>，
+      但 Completed Checkout 由 22 次調整至 18 次。
+      這表示購買意向並未消失，下一步最集中、亦最值得優先觀察的，
+      是如何更順暢地把已走到購買最後階段的訪客帶到完成交易。
     </div>
 
     <div class="grid three">
+
       <div class="mini">
-        <strong>8.77%</strong>
-        加購率達近期高位，顯示產品吸引力仍然存在
+        <strong>HK$8,536</strong>
+        新客收入
+        <div class="small">
+          與上期基本持平
+        </div>
       </div>
+
       <div class="mini">
-        <strong>37.5%</strong>
-        回購客戶佔比提升，既有客戶基礎維持穩定
+        <strong>+36.5%</strong>
+        Reached Checkout
+        <div class="small">
+          高意向訪客明顯增加
+        </div>
       </div>
+
       <div class="mini">
-        <strong>HK$1,387</strong>
-        官網直接回訪渠道 AOV，反映高價值客群仍具消費力
+        <strong>+4.9%</strong>
+        Facebook / Paid UTM 收入
+        <div class="small">
+          Shopify UTM 口徑仍錄得增長
+        </div>
       </div>
+
     </div>
+
   </section>
 
+
+  <!-- COMMERCIAL PERFORMANCE -->
   <section class="section">
-    <span class="tag">Commercial performance</span>
-    <h2>整體營運表現</h2>
+
+    <span class="tag">
+      Commercial performance
+    </span>
+
+    <h2>
+      整體營運表現
+    </h2>
+
     <table>
+
       <thead>
-        <tr><th>指標</th><th class="num">本期</th><th class="num">對比期</th><th class="num">變化</th></tr>
+        <tr>
+          <th>指標</th>
+          <th class="num">本期</th>
+          <th class="num">對比期</th>
+          <th class="num">變化</th>
+        </tr>
       </thead>
+
       <tbody>
-        <tr><td>總銷售額</td><td class="num">HK$21,382</td><td class="num">HK$34,352</td><td class="num">-37.7%</td></tr>
-        <tr><td>毛銷售額</td><td class="num">HK$23,181</td><td class="num">HK$38,613</td><td class="num">-40.0%</td></tr>
-        <tr><td>訂單數</td><td class="num">24</td><td class="num">37</td><td class="num">-35.1%</td></tr>
-        <tr><td>平均訂單價值</td><td class="num">HK$891</td><td class="num">HK$928</td><td class="num">-4.0%</td></tr>
-        <tr><td>折扣總額</td><td class="num">HK$1,799</td><td class="num">HK$4,261</td><td class="num">-57.8%</td></tr>
-        <tr><td>折扣率</td><td class="num">7.76%</td><td class="num">11.03%</td><td class="num up">改善 3.27pp</td></tr>
+
+        <tr>
+          <td>總銷售額</td>
+          <td class="num">HK$15,150.54</td>
+          <td class="num">HK$20,468.29</td>
+          <td class="num">-26.0%</td>
+        </tr>
+
+        <tr>
+          <td>折扣前商品銷售額</td>
+          <td class="num">HK$16,604.91</td>
+          <td class="num">HK$22,267.00</td>
+          <td class="num">-25.4%</td>
+        </tr>
+
+        <tr>
+          <td>訂單數</td>
+          <td class="num">19</td>
+          <td class="num">22</td>
+          <td class="num">-13.6%</td>
+        </tr>
+
+        <tr>
+          <td>平均訂單價值</td>
+          <td class="num">HK$797.40</td>
+          <td class="num">HK$930.38</td>
+          <td class="num">-14.3%</td>
+        </tr>
+
+        <tr>
+          <td>折扣總額</td>
+          <td class="num">HK$1,454.37</td>
+          <td class="num">HK$1,798.71</td>
+          <td class="num">-19.1%</td>
+        </tr>
+
+        <tr>
+          <td>按日平均營收</td>
+          <td class="num">HK$505.02</td>
+          <td class="num">HK$660.27</td>
+          <td class="num">-23.5%</td>
+        </tr>
+
       </tbody>
+
     </table>
+
     <p class="note">
-      折扣率下降反映本期整體毛利結構較上期健康。由於 100% 訂單均有觸發自動折扣，
-      下一步可進一步評估折扣機制是否應由「全單常態」逐步轉向更具目的性的客群或購物情境。
+      本期少一天並不足以解釋全部營收差距。
+      相比訂單數，AOV 及高金額訂單組合的變化對本期營收影響更明顯。
     </p>
+
   </section>
 
+
+  <!-- CUSTOMER MIX -->
   <section class="section">
-    <span class="tag">Customer mix</span>
-    <h2>新客與回購客戶結構</h2>
+
+    <span class="tag">
+      Customer mix
+    </span>
+
+    <h2>
+      新客與回購客戶結構
+    </h2>
+
     <div class="grid two">
+
       <div>
-        <h3>本期客戶組合</h3>
-        <div class="bar-row"><div>新客戶</div><div class="bar"><div class="fill" style="width:62.5%"></div></div><div>62.5%</div></div>
-        <div class="bar-row"><div>回購客戶</div><div class="bar"><div class="fill" style="width:37.5%"></div></div><div>37.5%</div></div>
+
+        <h3>
+          本期客戶組合
+        </h3>
+
+        <div class="bar-row">
+          <div>新客戶</div>
+
+          <div class="bar">
+            <div
+              class="fill"
+              style="width:68.42%">
+            </div>
+          </div>
+
+          <div>
+            68.4%
+          </div>
+        </div>
+
+        <div class="bar-row">
+          <div>回購客戶</div>
+
+          <div class="bar">
+            <div
+              class="fill soft"
+              style="width:31.58%">
+            </div>
+          </div>
+
+          <div>
+            31.6%
+          </div>
+        </div>
+
       </div>
+
       <div>
-        <h3>觀察</h3>
+
+        <h3>
+          收入結構
+        </h3>
+
         <p>
-          回購客戶實際人數由 8 人增至 9 人，基本盤維持穩定；回購客戶佔比由約 23% 升至 37.5%，
-          同時新客戶數由 28 人回調至 15 人。
+          <strong>新客：</strong>
+          13 人，收入 HK$8,536.24，
+          與上期 HK$8,507.90 基本持平。
         </p>
+
         <p>
-          因此，本期客戶結構更偏向既有客戶，下一階段可在維持回購動能的同時，
-          加強新客素材測試及上層漏斗觸達，逐步拉闊新增客源。
+          <strong>回購客：</strong>
+          6 人，收入 HK$6,614.30，
+          對比上期 HK$11,960.39。
         </p>
+
+        <p>
+          今期整體營收差距主要集中在回購收入。
+          因此下一階段可在維持新客 acquisition 的同時，
+          重新啟動更有針對性的舊客溝通及補貨提醒。
+        </p>
+
       </div>
+
     </div>
+
+    <div class="highlight">
+      本月沒有發送 SleekFlow 廣播訊息。
+      現有數據不足以直接證明廣播缺席與回購收入下降之間存在因果，
+      但重新啟動分眾式舊客溝通值得作為下一輪測試。
+    </div>
+
   </section>
 
+
+  <!-- TRAFFIC -->
   <section class="section">
-    <span class="tag">Traffic & conversion</span>
-    <h2>網站流量與轉化漏斗</h2>
+
+    <span class="tag">
+      Traffic & engagement
+    </span>
+
+    <h2>
+      網站流量與用戶行為
+    </h2>
+
+    <div class="grid four">
+
+      <div class="mini">
+        <strong>1,956</strong>
+        Sessions
+        <div class="small">
+          -12.9%
+        </div>
+      </div>
+
+      <div class="mini">
+        <strong>1,530</strong>
+        Visitors
+        <div class="small">
+          -10.0%
+        </div>
+      </div>
+
+      <div class="mini">
+        <strong>74.08%</strong>
+        Bounce Rate
+        <div class="small up">
+          改善 1.12pp
+        </div>
+      </div>
+
+      <div class="mini">
+        <strong>38.49s</strong>
+        Avg. Session Duration
+        <div class="small">
+          上期 61.85s
+        </div>
+      </div>
+
+    </div>
+
     <p>
-      本期總訪問 2,258 次，較上期減少 12.0%。流量回調幅度低於銷售額回調幅度，
-      顯示本期的主要優化空間集中在<strong>轉化效率</strong>，而不只是流量規模。
+      流量規模較上期收斂，
+      但跳出率略有改善。
+      平均停留時間縮短，下一步可持續觀察廣告素材與 Landing Page
+      之間的訊息一致性，讓進站訪客更快理解產品定位。
     </p>
+
+  </section>
+
+
+  <!-- SOURCE -->
+  <section class="section">
+
+    <span class="tag">
+      Acquisition mix
+    </span>
+
+    <h2>
+      流量來源表現
+    </h2>
+
+    <table>
+
+      <thead>
+
+        <tr>
+          <th>來源</th>
+          <th class="num">Sessions</th>
+          <th class="num">佔比</th>
+          <th class="num">Completed Checkout</th>
+          <th class="num">轉化率</th>
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td>Social</td>
+          <td class="num">1,057</td>
+          <td class="num">54.0%</td>
+          <td class="num">5</td>
+          <td class="num">0.47%</td>
+        </tr>
+
+        <tr>
+          <td>Direct</td>
+          <td class="num">787</td>
+          <td class="num">40.2%</td>
+          <td class="num">9</td>
+          <td class="num">1.14%</td>
+        </tr>
+
+        <tr>
+          <td>Search</td>
+          <td class="num">58</td>
+          <td class="num">3.0%</td>
+          <td class="num">2</td>
+          <td class="num up">3.45%</td>
+        </tr>
+
+        <tr>
+          <td>Unknown</td>
+          <td class="num">43</td>
+          <td class="num">2.2%</td>
+          <td class="num">2</td>
+          <td class="num">4.65%</td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+    <div class="highlight">
+      Search 流量規模仍然較細，但 58 次訪問錄得 2 次完成結帳。
+      樣本尚不足以支持大幅資源轉移，
+      但對 SEO / Blog 的中長期發展屬正面訊號。
+    </div>
+
+  </section>
+
+
+  <!-- DEVICE -->
+  <section class="section">
+
+    <span class="tag">
+      Device mix
+    </span>
+
+    <h2>
+      設備分布
+    </h2>
+
+    <div class="grid three">
+
+      <div class="metric-callout">
+        <div class="big">
+          88.2%
+        </div>
+
+        <strong>手機</strong>
+
+        <p>
+          1,725 次訪問<br>
+          16 次完成結帳
+        </p>
+      </div>
+
+      <div class="metric-callout">
+        <div class="big">
+          221
+        </div>
+
+        <strong>桌面</strong>
+
+        <p>
+          本期未記錄到完成結帳
+        </p>
+      </div>
+
+      <div class="metric-callout">
+        <div class="big">
+          9
+        </div>
+
+        <strong>平板</strong>
+
+        <p>
+          2 次完成結帳<br>
+          樣本量較小
+        </p>
+      </div>
+
+    </div>
+
+    <p class="note">
+      因近九成網站訪問來自手機，
+      產品頁、購物車及 Checkout 的任何流程檢視，
+      均應優先以 Mobile 為主要測試場景。
+    </p>
+
+  </section>
+
+
+  <!-- FUNNEL -->
+  <section class="section">
+
+    <span class="tag">
+      Conversion funnel
+    </span>
+
+    <h2>
+      網站轉化漏斗
+    </h2>
 
     <div class="funnel">
-      <div class="step"><div class="n">2,258</div><div class="t">Sessions</div><div class="arrow">100%</div></div>
-      <div class="step"><div class="n">198</div><div class="t">Add to Cart</div><div class="arrow">8.77%</div></div>
-      <div class="step"><div class="n">55</div><div class="t">Reached Checkout</div><div class="arrow">27.8% of ATC</div></div>
-      <div class="step"><div class="n">24</div><div class="t">Purchase</div><div class="arrow">43.6% of Checkout</div></div>
+
+      <div class="step">
+        <div class="n">
+          1,956
+        </div>
+        <div class="t">
+          Sessions
+        </div>
+        <div class="arrow">
+          100%
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="n">
+          160
+        </div>
+        <div class="t">
+          Add to Cart
+        </div>
+        <div class="arrow">
+          8.18%
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="n">
+          71
+        </div>
+        <div class="t">
+          Reached Checkout
+        </div>
+        <div class="arrow up">
+          +36.5%
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="n">
+          18
+        </div>
+        <div class="t">
+          Completed Checkout
+        </div>
+        <div class="arrow">
+          0.92% of Sessions
+        </div>
+      </div>
+
     </div>
 
-    <div class="grid two" style="margin-top:18px">
+    <div
+      class="grid two"
+      style="margin-top:18px">
+
       <div class="mini">
-        <strong>72.2%</strong>
-        由加購至進入結帳的流失比例，建議優先檢視 Cart Drawer、運費資訊、折扣顯示及手機版操作。
+
+        <strong>25.35%</strong>
+
+        Checkout Completion Rate
+
+        <div class="small">
+          上期 42.31%
+        </div>
+
       </div>
+
       <div class="mini">
-        <strong>56.4%</strong>
-        已進入結帳但未完成購買的比例，可透過 checkout UX、付款方式及再行銷進一步改善。
+
+        <strong>74.65%</strong>
+
+        Checkout Stage Drop-off
+
+        <div class="small">
+          上期 57.69%
+        </div>
+
       </div>
+
     </div>
-    <p class="note">
-      Shopify 自 2026/09/21 起調整 sessions 計算方式，因此本期後段流量數據可能存在輕微口徑差異。
-    </p>
+
+    <div class="highlight">
+      今期真正值得留意的是：
+      <strong>更多人走到 Checkout，但較少人完成最後交易。</strong>
+      因此下一階段只需要針對手機版 Checkout 作輕量檢視，
+      包括付款方法、運費資訊、折扣呈現及操作流程，
+      目標是讓已經具有購買意向的訪客更順暢完成最後一步。
+    </div>
+
   </section>
 
+
+  <!-- CHANNEL REVENUE -->
   <section class="section">
-    <span class="tag">Channel performance</span>
-    <h2>渠道營收表現</h2>
+
+    <span class="tag">
+      Channel revenue
+    </span>
+
+    <h2>
+      渠道營收表現
+    </h2>
+
     <table>
+
       <thead>
-        <tr><th>渠道</th><th class="num">營收</th><th class="num">訂單</th><th class="num">AOV</th><th>重點觀察</th></tr>
+
+        <tr>
+          <th>來源</th>
+          <th class="num">營收</th>
+          <th class="num">訂單</th>
+          <th class="num">平均訂單金額</th>
+          <th>觀察</th>
+        </tr>
+
       </thead>
+
       <tbody>
-        <tr><td>Direct / 未歸因</td><td class="num">HK$7,462</td><td class="num">9</td><td class="num">HK$829</td><td>仍為主要收入來源之一</td></tr>
-        <tr><td>evenifhk 官網</td><td class="num">HK$6,937</td><td class="num">5</td><td class="num">HK$1,387</td><td class="up">營收 +113.7%，高價值回訪客表現突出</td></tr>
-        <tr><td>Instagram</td><td class="num">HK$4,279</td><td class="num">6</td><td class="num">—</td><td>仍是主要社交流量與成交來源</td></tr>
-        <tr><td>Linktree</td><td class="num">HK$1,986</td><td class="num">2</td><td class="num">—</td><td>具持續導流作用</td></tr>
-        <tr><td>Facebook</td><td class="num">HK$718</td><td class="num">2</td><td class="num">—</td><td>本期貢獻較小，可配合再行銷定位</td></tr>
+
+        <tr>
+          <td>未標示</td>
+          <td class="num">HK$6,198.14</td>
+          <td class="num">7</td>
+          <td class="num">HK$885.45</td>
+          <td>仍為主要收入來源之一</td>
+        </tr>
+
+        <tr>
+          <td>Linktr</td>
+          <td class="num">HK$3,726.40</td>
+          <td class="num">2</td>
+          <td class="num up">HK$1,863.20</td>
+          <td>本期高價值訂單來源</td>
+        </tr>
+
+        <tr>
+          <td>Instagram</td>
+          <td class="num">HK$2,598.00</td>
+          <td class="num">5</td>
+          <td class="num">HK$519.60</td>
+          <td>主要 Social acquisition 來源</td>
+        </tr>
+
+        <tr>
+          <td>evenifhk</td>
+          <td class="num">HK$1,870.00</td>
+          <td class="num">3</td>
+          <td class="num">HK$623.33</td>
+          <td>直接官網成交</td>
+        </tr>
+
+        <tr>
+          <td>Google</td>
+          <td class="num">HK$758.00</td>
+          <td class="num">2</td>
+          <td class="num">HK$379.00</td>
+          <td>Search 規模仍小但已有成交</td>
+        </tr>
+
       </tbody>
+
     </table>
+
   </section>
 
+
+  <!-- UTM -->
   <section class="section">
-    <span class="tag">Meta ads</span>
-    <h2>Meta 廣告表現</h2>
+
+    <span class="tag">
+      Attribution
+    </span>
+
+    <h2>
+      UTM 與 Paid Revenue
+    </h2>
+
+    <div class="grid two">
+
+      <div class="metric-callout">
+
+        <div class="big">
+          HK$7,368
+        </div>
+
+        <strong>
+          Facebook / Paid UTM 收入
+        </strong>
+
+        <p class="up">
+          較上期約 +4.9%
+        </p>
+
+      </div>
+
+      <div class="metric-callout">
+
+        <div class="big">
+          HK$7,782
+        </div>
+
+        <strong>
+          無 UTM 收入
+        </strong>
+
+        <p>
+          9 張訂單
+        </p>
+
+      </div>
+
+    </div>
+
+    <p>
+      Meta Ads Manager 與 Shopify UTM 採用不同歸因邏輯，
+      因此不應將兩套數據直接混合作同一個 ROAS。
+      今期雖然 Meta 平台 ROAS 回調，
+      Shopify 所記錄的 Facebook / Paid UTM revenue
+      則由 HK$7,023 增至 HK$7,368。
+    </p>
+
+  </section>
+
+
+  <!-- DISCOUNTS -->
+  <section class="section">
+
+    <span class="tag">
+      Promotion performance
+    </span>
+
+    <h2>
+      折扣活動表現
+    </h2>
+
     <div class="grid three">
-      <div class="mini"><strong>HK$7,022</strong>本期廣告花費</div>
-      <div class="mini"><strong>2.42</strong>整體 Meta ROAS</div>
-      <div class="mini"><strong>3.80</strong>平均頻率</div>
+
+      <div class="mini">
+
+        <strong>8 張</strong>
+
+        使用折扣訂單
+
+        <div class="small">
+          佔全部訂單 42.1%
+        </div>
+
+      </div>
+
+      <div class="mini">
+
+        <strong>HK$11,259</strong>
+
+        折扣訂單營收
+
+        <div class="small">
+          佔全店收入 74.31%
+        </div>
+
+      </div>
+
+      <div class="mini">
+
+        <strong>HK$1,407</strong>
+
+        折扣訂單平均金額
+
+        <div class="small">
+          上期 HK$1,434
+        </div>
+
+      </div>
+
     </div>
 
     <table style="margin-top:18px">
+
       <thead>
-        <tr><th>Campaign</th><th class="num">Spend</th><th class="num">Purchases</th><th class="num">ROAS</th><th>建議方向</th></tr>
+
+        <tr>
+          <th>優惠</th>
+          <th class="num">相關訂單</th>
+          <th class="num">相關銷售額</th>
+          <th class="num">平均訂單金額</th>
+          <th class="num">優惠成本</th>
+        </tr>
+
       </thead>
+
       <tbody>
-        <tr><td>Elaceite supplement (ALL)</td><td class="num">HK$3,631</td><td class="num">12</td><td class="num up">3.22</td><td>目前最穩定支柱，可分階段增加預算</td></tr>
-        <tr><td>Elaceite Hair_Dark Post</td><td class="num">HK$1,615</td><td class="num">3</td><td class="num">1.34</td><td>建議更新創意素材，再測試同一產品需求</td></tr>
-        <tr><td>Updated elaceite wine</td><td class="num">HK$954</td><td class="num">4</td><td class="num up">2.80</td><td>表現健康，可維持並觀察放量後穩定度</td></tr>
-        <tr><td>SOEL LIVING OIL LOTION</td><td class="num">HK$267</td><td class="num">1</td><td class="num">1.65</td><td>仍屬早期測試，建議累積更多樣本再判斷</td></tr>
+
+        <tr>
+          <td>HK$50 活動</td>
+          <td class="num">5</td>
+          <td class="num">HK$4,721.90</td>
+          <td class="num">HK$944.38</td>
+          <td class="num">HK$251.01</td>
+        </tr>
+
+        <tr>
+          <td>88折活動</td>
+          <td class="num">3</td>
+          <td class="num">HK$6,536.64</td>
+          <td class="num up">HK$2,178.88</td>
+          <td class="num">HK$891.36</td>
+        </tr>
+
+        <tr>
+          <td>5%活動</td>
+          <td class="num">3</td>
+          <td class="num">HK$6,536.64</td>
+          <td class="num">—</td>
+          <td class="num">HK$312.00</td>
+        </tr>
+
       </tbody>
+
     </table>
 
     <div class="highlight">
-      Meta ROAS 由 7 月高位 6.55 回落至 2.89，再至本期 2.42。與其單純增加投放量，
-      下一階段更適合以「更新素材 + 集中預算在已有證據的產品 + 強化再行銷」作為核心，
-      以提升每一元媒體投入的產出穩定度。
+      折扣仍然集中支撐較高金額訂單，
+      特別是 88 折訂單平均金額仍達 HK$2,179。
+      因此現階段更適合保留現有門檻，
+      再透過「距離下一級優惠尚差 HK$XX」等溝通方式提升 Basket Size，
+      而不是立即全面加深折扣。
     </div>
+
   </section>
 
+
+  <!-- PRODUCT PERFORMANCE -->
   <section class="section">
-    <span class="tag">Product performance</span>
-    <h2>產品表現重點</h2>
-    <table>
+
+    <span class="tag">
+      Product performance
+    </span>
+
+    <h2>
+      暢銷產品表現
+    </h2>
+
+    <div class="product-rank">
+
+      <div class="rank">1</div>
+      <div>
+        <strong>
+          elaceite 豐盈髮況胺基酸豐盈亮澤膠囊
+        </strong>
+      </div>
+      <div class="money">
+        HK$3,915.81
+      </div>
+      <div class="qty">
+        4 orders
+      </div>
+      <div class="share">
+        25.85%
+      </div>
+
+      <div class="rank">2</div>
+      <div>
+        <strong>
+          elaceite 24:01 無醇白葡萄氣泡酒
+        </strong>
+      </div>
+      <div class="money">
+        HK$2,526.00
+      </div>
+      <div class="qty">
+        5 orders
+      </div>
+      <div class="share">
+        16.67%
+      </div>
+
+      <div class="rank">3</div>
+      <div>
+        <strong>
+          elaceite 亮澤膠原雙效組合
+        </strong>
+      </div>
+      <div class="money">
+        HK$2,488.40
+      </div>
+      <div class="qty">
+        2 orders
+      </div>
+      <div class="share">
+        16.42%
+      </div>
+
+      <div class="rank">4</div>
+      <div>
+        elaceite 潤澤平衡28日組
+      </div>
+      <div class="money">
+        HK$1,320.00
+      </div>
+      <div class="qty">
+        1 order
+      </div>
+      <div class="share">
+        8.71%
+      </div>
+
+      <div class="rank">5</div>
+      <div>
+        elaceite 葡萄果肌能亮采膠囊
+      </div>
+      <div class="money">
+        HK$881.05
+      </div>
+      <div class="qty">
+        2 orders
+      </div>
+      <div class="share">
+        5.81%
+      </div>
+
+      <div class="rank">6</div>
+      <div>
+        evenif 妍理理初見組合
+      </div>
+      <div class="money">
+        HK$678.62
+      </div>
+      <div class="qty">
+        1 order
+      </div>
+      <div class="share">
+        4.48%
+      </div>
+
+      <div class="rank">7</div>
+      <div>
+        elaceite × SOEL 女性私密內外修復組合
+      </div>
+      <div class="money">
+        HK$593.70
+      </div>
+      <div class="qty">
+        1 order
+      </div>
+      <div class="share">
+        3.92%
+      </div>
+
+      <div class="rank">8</div>
+      <div>
+        Yanlili Y33 妍曦霧感防曬棒
+      </div>
+      <div class="money">
+        HK$591.38
+      </div>
+      <div class="qty">
+        3 orders
+      </div>
+      <div class="share">
+        3.90%
+      </div>
+
+      <div class="rank">9</div>
+      <div>
+        elaceite 鈣鎂基礎平衡膠囊
+      </div>
+      <div class="money">
+        HK$474.00
+      </div>
+      <div class="qty">
+        1 order
+      </div>
+      <div class="share">
+        3.13%
+      </div>
+
+      <div class="rank">10</div>
+      <div>
+        ASTALIFT 10000毫克純骨膠原美肌飲10支
+      </div>
+      <div class="money">
+        HK$451.44
+      </div>
+      <div class="qty">
+        1 order
+      </div>
+      <div class="share">
+        2.98%
+      </div>
+
+    </div>
+
+    <div class="highlight">
+      前三項產品合計貢獻約
+      <strong>58.9%</strong>
+      全店收入。
+      Hair 仍然是主要 Revenue Hero；
+      24:01 則錄得最多訂單之一，
+      顯示其作為 Lifestyle / Occasion Product
+      具有持續延伸空間。
+    </div>
+
+  </section>
+
+
+  <!-- META -->
+  <section class="section">
+
+    <span class="tag">
+      Meta ads
+    </span>
+
+    <h2>
+      Meta 廣告表現
+    </h2>
+
+    <div class="grid four">
+
+      <div class="mini">
+        <strong>HK$6,754</strong>
+        Ad Spend
+      </div>
+
+      <div class="mini">
+        <strong>1.65</strong>
+        ROAS
+      </div>
+
+      <div class="mini">
+        <strong>78,370</strong>
+        Impressions
+      </div>
+
+      <div class="mini">
+        <strong>3.59</strong>
+        Frequency
+      </div>
+
+    </div>
+
+    <table style="margin-top:18px">
+
       <thead>
-        <tr><th>產品</th><th class="num">本期營收</th><th class="num">訂單</th><th>表現觀察</th></tr>
+
+        <tr>
+          <th>Campaign</th>
+          <th class="num">Spend</th>
+          <th class="num">Purchases</th>
+          <th class="num">CPA</th>
+          <th class="num">ROAS</th>
+          <th>方向</th>
+        </tr>
+
       </thead>
+
       <tbody>
-        <tr><td>elaceite 豐盈髮況胺基酸膠囊</td><td class="num">HK$4,686</td><td class="num">5</td><td>仍為本期最高營收單品</td></tr>
-        <tr><td>皺紋與脫髮療方組合</td><td class="num">HK$3,177</td><td class="num">2</td><td>AOV HK$1,588，高客單組合具價值</td></tr>
-        <tr><td>葡萄果肌能亮采膠囊</td><td class="num">HK$2,389</td><td class="num">4</td><td class="up">較上期 +20.1%，呈正向增長</td></tr>
-        <tr><td>全方位內在補給 28 日組</td><td class="num">HK$2,027</td><td class="num">2</td><td>重新進入暢銷榜</td></tr>
-        <tr><td>黑醋栗葉黃素晶潤膠囊</td><td class="num">HK$1,804</td><td class="num">2</td><td>首次進榜，具內容與廣告延伸空間</td></tr>
-        <tr><td>鈣鎂基礎平衡膠囊</td><td class="num">HK$1,476</td><td class="num">4</td><td>首次進榜，可持續觀察回購潛力</td></tr>
+
+        <tr>
+          <td>Elaceite Supplement</td>
+          <td class="num">HK$3,885.81</td>
+          <td class="num">6</td>
+          <td class="num">HK$647.64</td>
+          <td class="num up">1.98</td>
+          <td>
+            目前仍為主要 campaign 中 ROAS 最高的一組，
+            建議保留並持續測試 creative。
+          </td>
+        </tr>
+
+        <tr>
+          <td>elaceite Wine</td>
+          <td class="num">HK$1,610.36</td>
+          <td class="num">6</td>
+          <td class="num up">HK$268.39</td>
+          <td class="num">1.75</td>
+          <td>
+            CPA 較低，適合延伸 Wedding、Dinner、
+            Driver、Year-end Gathering 等情境。
+          </td>
+        </tr>
+
+        <tr>
+          <td>Yanlili Mask</td>
+          <td class="num">HK$771.21</td>
+          <td class="num">1</td>
+          <td class="num">HK$771.21</td>
+          <td class="num">0.19</td>
+          <td>
+            建議由單品 hard-sell 轉向換季敏感、
+            補濕指南等內容型 creative。
+          </td>
+        </tr>
+
+        <tr>
+          <td>SOEL</td>
+          <td class="num">HK$487.00</td>
+          <td class="num">1</td>
+          <td class="num">HK$487.00</td>
+          <td class="num">0.90</td>
+          <td>
+            建議用 Lotion + Serum / Cream
+            建立完整 routine story，再作小額測試。
+          </td>
+        </tr>
+
       </tbody>
+
     </table>
-    <p class="note">
-      Yanlili 系列於本期缺少相應廣告曝光後，榜單能見度同步下降。此現象支持品牌曝光與產品銷售具一定關聯，
-      下一階段可透過較輕量的再測試確認最有效的投放產品與素材組合。
-    </p>
+
+    <div class="highlight">
+      本期 Media Spend 只較上期減少約 3.8%，
+      因此下一階段重點不是單純增加 Budget，
+      而是<strong>集中預算到已有成交證據的產品，
+      同時更新 creative angle</strong>。
+    </div>
+
   </section>
 
+
+  <!-- SEO -->
   <section class="section">
-  <span class="tag">Growth priorities</span>
-  <h2>下一階段推廣方向</h2>
 
-  <p>
-    下一階段將以<strong>廣告素材更新、預算重新配置及入秋主題內容</strong>為核心，
-    在維持現有高意向客群的同時，逐步建立更多具季節感及生活情境的溝通角度，
-    令不同產品有更清晰的推廣角色。
-  </p>
+    <span class="tag">
+      SEO & content
+    </span>
 
-  <div class="priority">
+    <h2>
+      Search 與身心養護誌
+    </h2>
 
-    <div>P1</div>
-    <div>調整 Meta Ad Creatives</div>
-    <div>
-      針對現有廣告素材進行新一輪更新，減少長期重複使用同一視覺或訊息。
-      尤其 Hair 系列可重新製作不同切入角度，包括日常壓力、營養補給、
-      洗頭掉髮情境及女性髮況管理等內容，再觀察不同 creative 對轉化的影響。
+    <div class="grid three">
+
+      <div class="mini">
+        <strong>58</strong>
+        Google Sessions
+      </div>
+
+      <div class="mini">
+        <strong>2</strong>
+        Completed Checkout
+      </div>
+
+      <div class="mini">
+        <strong>HK$758</strong>
+        Google Order Revenue
+      </div>
+
     </div>
 
-    <div>P1</div>
-    <div>重新分配廣告預算</div>
-    <div>
-      將較多預算集中於近期表現較穩定的 Elaceite Supplement 系列，
-      並保留部分測試預算予 Wine、SOEL 及 Yanlili。
-      預算調整以分階段方式進行，讓表現較好的 campaign 有更多放量空間，
-      同時避免一次性大幅增加投放。
-    </div>
-
-    <div>P1</div>
-    <div>建立入秋產品宣傳主題</div>
-    <div>
-      10 月開始可由「轉季」切入不同生活需要，
-      將護膚、營養及生活方式產品重新組合成更具季節感的內容，
-      令廣告不只集中於單一產品功能，而是回應入秋後的日常情境。
-    </div>
-
-    <div>P2</div>
-    <div>秋季肌膚保養系列</div>
-    <div>
-      以「夏天清爽保養 → 秋季保濕修護」作內容轉換，
-      重點推廣 SOEL LIVING OIL LOTION、北麓草水眼霜及 Yanlili 面膜。
-      Creative 可圍繞冷氣環境、轉季乾燥、底妝不貼及晚間修護等生活場景。
-    </div>
-
-    <div>P2</div>
-    <div>秋季內在補給系列</div>
-    <div>
-      Elaceite 可延續「日常營養補給」方向，
-      分別以長時間用眼、忙碌生活、睡眠與放鬆節奏、
-      髮況管理及抗氧化營養等主題製作內容，
-      讓不同 Supplement 有更清晰的情境定位。
-    </div>
-
-    <div>P2</div>
-    <div>無醇生活方式內容</div>
-    <div>
-      24:01 無醇氣泡酒可由單純產品廣告延伸至聚會、晚餐、
-      weekday evening 及翌日需要保持清醒等情境，
-      將產品定位由「無酒精替代品」進一步建立成生活方式選擇。
-    </div>
-
-    <div>P2</div>
-    <div>重新測試 Yanlili 曝光</div>
-    <div>
-      Yanlili 本期在缺少廣告曝光後銷售能見度同步下降，
-      下一階段可先以較輕量預算重新測試防曬及面膜系列，
-      並使用較生活化、季節性的素材觀察市場反應。
-    </div>
-
-    <div>P3</div>
-    <div>提升結帳體驗</div>
-    <div>
-      網站方面會同步檢視 Checkout 的版面及操作體驗，
-      包括手機顯示、付款選項及資訊呈現，
-      以更順暢的介面承接現有較高的加購意向。
-    </div>
-
-  </div>
-</section>
-
-  <section class="section">
-    <span class="tag">Measurement</span>
-    <h2>量度框架建議</h2>
     <p>
-      除 Meta ROAS 外，建議同步加入 blended MER 作整體媒體效率參考。
-      本期 Store Sales / Ad Spend 約為 <strong>3.05</strong>，對比上期約 <strong>4.04</strong>。
-      未來若進一步加入產品毛利、支付費、物流補貼及折扣成本，可建立更完整的
-      <strong>Break-even ROAS / Break-even CPA</strong>，令擴量決策更精準。
+      Search 目前只佔整體流量約 3%，
+      規模仍然較小，但已錄得實際成交。
+      Blog Article 作為直接入口的流量目前亦仍處於早期累積階段，
+      因此短期不應單純以 Blog Sessions 判斷 SEO 成效。
     </p>
+
+    <p>
+      下一階段更適合聚焦具明確搜尋意圖的題目：
+    </p>
+
+    <span class="pill">
+      換季敏感肌
+    </span>
+
+    <span class="pill">
+      香港秋季補濕
+    </span>
+
+    <span class="pill">
+      戴Con眼乾
+    </span>
+
+    <span class="pill">
+      壓力掉髮
+    </span>
+
+    <span class="pill">
+      鎂與睡眠
+    </span>
+
+    <span class="pill">
+      防曬需要卸妝嗎
+    </span>
+
   </section>
 
+
+  <!-- GROWTH PRIORITIES -->
+  <section class="section">
+
+    <span class="tag">
+      Growth priorities
+    </span>
+
+    <h2>
+      下一階段推廣方向
+    </h2>
+
+    <p>
+      下一階段建議由單純「增加流量」，
+      轉向<strong>核心產品集中 × Creative 更新 × 舊客重新啟動</strong>，
+      在保持新客 acquisition 的同時，
+      重新提升回購收入及平均訂單價值。
+    </p>
+
+    <div class="priority">
+
+      <div>P1</div>
+
+      <div>
+        重啟舊客溝通
+      </div>
+
+      <div>
+        重新啟動 SleekFlow 分眾推廣，
+        按曾購產品及大概補貨週期設計訊息。
+        Hair、Supplement、Skincare、24:01
+        分開溝通，而非只發一次全店折扣。
+      </div>
+
+
+      <div>P1</div>
+
+      <div>
+        Meta Creative Refresh
+      </div>
+
+      <div>
+        Hair 由產品功效轉向洗頭掉髮、壓力生活、
+        分界線等日常情境；
+        24:01 延伸 Wedding、揸車人士、
+        After-work、Dinner 及 Year-end Gathering。
+      </div>
+
+
+      <div>P1</div>
+
+      <div>
+        Budget Allocation
+      </div>
+
+      <div>
+        優先保留 Supplement 與 Wine，
+        將更多預算集中於已有購買證據的 campaign；
+        Skincare 保留小額 testing budget，
+        用新 creative 重新測試。
+      </div>
+
+
+      <div>P2</div>
+
+      <div>
+        提升 Basket Size
+      </div>
+
+      <div>
+        更清楚呈現
+        HK$800 / HK$1,200 / HK$1,800
+        優惠門檻，並測試
+        「再加 HK$XX 即享下一級優惠」
+        及自然 product pairing。
+      </div>
+
+
+      <div>P2</div>
+
+      <div>
+        Product Pairing
+      </div>
+
+      <div>
+        建立更清晰的組合內容：
+        Hair + Collagen、
+        SOEL Lotion + Serum、
+        Y33 + Cleansing Oil、
+        24:01 多支裝 / occasion pack。
+      </div>
+
+
+      <div>P3</div>
+
+      <div>
+        輕量檢視 Checkout
+      </div>
+
+      <div>
+        只針對手機版檢查付款方式、
+        運費、優惠顯示及折扣疊加，
+        目標是讓已到達 Checkout 的高意向訪客
+        更順暢完成交易。
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- MEASUREMENT -->
+  <section class="section">
+
+    <span class="tag">
+      Measurement
+    </span>
+
+    <h2>
+      下一階段量度框架
+    </h2>
+
+    <div class="grid four">
+
+      <div class="mini">
+        <strong>
+          Repeat Revenue
+        </strong>
+        回購客收入
+      </div>
+
+      <div class="mini">
+        <strong>
+          Checkout CVR
+        </strong>
+        Checkout Completion
+      </div>
+
+      <div class="mini">
+        <strong>
+          AOV
+        </strong>
+        Average Order Value
+      </div>
+
+      <div class="mini">
+        <strong>
+          MER
+        </strong>
+        Blended Media Efficiency
+      </div>
+
+    </div>
+
+    <div class="grid two" style="margin-top:16px">
+
+      <div class="metric-callout">
+
+        <div class="big">
+          2.24x
+        </div>
+
+        <strong>
+          本期 Store Sales / Meta Spend
+        </strong>
+
+      </div>
+
+      <div class="metric-callout">
+
+        <div class="big">
+          2.92x
+        </div>
+
+        <strong>
+          對比期 Store Sales / Meta Spend
+        </strong>
+
+      </div>
+
+    </div>
+
+    <p class="note">
+      MER 只作整體媒體效率參考，
+      尚未扣除商品成本、物流、支付費及折扣，
+      不應直接視為利潤。
+    </p>
+
+  </section>
+
+
+  <!-- CONCLUSION -->
+  <section class="section">
+
+    <span class="tag">
+      Closing view
+    </span>
+
+    <h2>
+      本期總結
+    </h2>
+
+    <p class="lead">
+      本期最大變化並不是新客 acquisition 明顯轉弱。
+      新客人數及新客收入均保持穩定，
+      整體營收差距主要集中在
+      <strong>回購收入、平均訂單價值及 Checkout Completion</strong>。
+    </p>
+
+    <p>
+      同時，本期仍然錄得多項值得延續的訊號：
+    </p>
+
+    <p>
+      ✓ Hair 繼續成為最高收入產品<br>
+      ✓ 24:01 成為訂單數最多的核心產品之一<br>
+      ✓ Y33 防曬棒進入 Top 10<br>
+      ✓ Paid UTM Revenue 按 Shopify 口徑錄得增長<br>
+      ✓ Search 雖然規模小，但已有實際成交<br>
+      ✓ Reached Checkout 明顯增加，反映購買意向仍然存在
+    </p>
+
+    <div class="quote">
+      下一階段的重點不是單純「買更多流量」，
+      而是用同一批流量創造更高價值，
+      再把已經買過的人重新帶返嚟。
+    </div>
+
+  </section>
+
+
+  <!-- FOOTER -->
   <div class="foot">
-    數據來源：Shopify、Meta Ads Manager 及本期營運報告。Meta 與 Shopify 因歸因窗口、跨裝置及隱私限制，
-    實際歸因數字可能存在差異；部分 Direct 訂單亦可能包含廣告後續回訪轉化。
+
+    <p>
+      數據來源：Shopify、Meta Ads Manager 及本期營運報告。
+      Meta 與 Shopify 因歸因窗口、跨裝置及私隱限制，
+      實際歸因數字可能存在差異。
+    </p>
+
+    <div class="source-links">
+
+      Shopify Sales Reports：<br>
+
+      <a
+        href="https://help.shopify.com/zh-TW/manual/reports-and-analytics/shopify-reports/report-types/default-reports/sales-report"
+        target="_blank">
+        https://help.shopify.com/zh-TW/manual/reports-and-analytics/shopify-reports/report-types/default-reports/sales-report
+      </a>
+
+      <br><br>
+
+      Shopify Bot Filtering / Sessions Update：<br>
+
+      <a
+        href="https://help.shopify.com/zh-TW/manual/intro-to-shopify/bots/bot-filtering"
+        target="_blank">
+        https://help.shopify.com/zh-TW/manual/intro-to-shopify/bots/bot-filtering
+      </a>
+
+    </div>
+
   </div>
 
 </div>
+
 </body>
 </html>
